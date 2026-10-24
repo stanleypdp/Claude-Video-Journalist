@@ -1,0 +1,3 @@
+{
+  "result": "{\"schema_version\": 6, \"role\": \"knowledge\", \"title\": \"Narz\\u0119dzie kosztowe\", \"tags\": [], \"article\": [{\"start\": 0, \"text\": \"Autor twierdzi, \\u017ce koszty spadaj\\u0105 o 75% dzi\\u0119ki temu narz\\u0119dziowi.\"}], \"screen_data\": [], \"card\": {\"profile\": \"analysis\", \"domain\": \"narz\\u0119dzia\", \"claim\": \"Koszty spadaj\\u0105 o 75% dzi\\u0119ki temu narz\\u0119dziu\", \"author_conclusion\": \"Narz\\u0119dzie obni\\u017ca koszty\", \"reported\": [\"Koszty spadaj\\u0105 o 75% @1\"], \"method_stated\": [], \"not_stated\": [], \"caution\": [], \"agent_notes\": []}}"
+}

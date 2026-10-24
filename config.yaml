@@ -1,0 +1,24 @@
+# vjournalist settings. Environment variables (e.g. DATA_DIR, MODEL_ANALYSIS) take precedence.
+
+# Folders `read` processes when called without an argument. Results go to <parent>/OUTPUT/<folder name>.
+input_folders: []
+
+model: sonnet            # Claude CLI model for the Read role (one call per video)
+language: auto           # ASR language: auto or a code (en, pl, ...)
+whisper_model: small
+whisper_threads: 6
+word_timestamps: true
+ocr: true
+
+# Domain vocabulary for ASR (whisper initial_prompt): names and terms that occur in your videos.
+asr_dictionary: ""
+
+limits:
+  max_video_seconds: 3600
+  max_storage_gb: 80
+  llm_timeout_s: 600
+  frame_limit: 36
+  sheet_frames: 9
+
+data_dir: data           # cache, work, reports, models (kept out of git)
+claude_bin: claude

@@ -1,0 +1,23 @@
+{
+  "role": "knowledge",
+  "schema_version": 6,
+  "metadata": {
+    "duration_s": 8
+  },
+  "transcript": {
+    "language": "en",
+    "segments": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "The level was touched in 55.7% of sessions."
+      }
+    ]
+  },
+  "ocr": [
+    {
+      "text": "HIT RATE 55.2%",
+      "text_confidence": "exact"
+    }
+  ]
+}

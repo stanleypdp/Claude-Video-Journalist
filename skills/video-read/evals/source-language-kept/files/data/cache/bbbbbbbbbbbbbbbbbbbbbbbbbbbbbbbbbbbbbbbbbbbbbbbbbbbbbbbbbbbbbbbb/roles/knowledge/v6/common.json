@@ -1,0 +1,31 @@
+{
+  "transcript": {
+    "language": "en",
+    "segments": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Costs fall by 75 percent with this tool."
+      }
+    ]
+  },
+  "scan": {
+    "screen_text": [
+      {
+        "id": 1,
+        "timestamp_s": 2.0,
+        "last_seen_s": 5.0,
+        "text": "Costs: -75%",
+        "text_confidence": "exact",
+        "ocr_score": 0.97
+      }
+    ],
+    "frames": []
+  },
+  "metadata": {
+    "duration_s": 8
+  },
+  "platform_info": {
+    "content_duration_s": 8
+  }
+}

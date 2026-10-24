@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: detects-planted-number-error
+expected_outcome: |
+  The rebuild runs from the cache with no Claude call. The report says speech (55.7) and screen (55.2) disagree and that the transcript archive's number_check shows conflict(OCR:55.2) for 55.7. It does not decide the right value on its own and does not hand-edit any number.
+context:
+  scaffold_script: place-files.sh

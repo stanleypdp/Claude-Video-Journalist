@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: plan-from-card-only
+expected_outcome: |
+  plan.md is built from INDEX.md and the card only: hypothesis labelled as the author's claim, the reported figures with their seconds, the stated method, the gaps from not_stated, criteria using only card numbers, and the risks. The archive is not read and the card's status stays untested.
+context:
+  scaffold_script: place-files.sh

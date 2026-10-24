@@ -1,0 +1,23 @@
+{
+  "role": "knowledge",
+  "schema_version": 6,
+  "metadata": {
+    "duration_s": 8
+  },
+  "transcript": {
+    "language": "en",
+    "segments": [
+      {
+        "start": 0,
+        "end": 6,
+        "text": "Costs fall by 75 percent with this tool."
+      }
+    ]
+  },
+  "ocr": [
+    {
+      "text": "Costs: -75%",
+      "text_confidence": "exact"
+    }
+  ]
+}

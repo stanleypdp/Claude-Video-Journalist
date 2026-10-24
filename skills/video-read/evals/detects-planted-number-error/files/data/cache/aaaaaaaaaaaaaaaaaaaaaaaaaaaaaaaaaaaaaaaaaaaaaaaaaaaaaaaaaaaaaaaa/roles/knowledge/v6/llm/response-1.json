@@ -1,0 +1,3 @@
+{
+  "result": "{\"schema_version\": 6, \"role\": \"knowledge\", \"title\": \"Level test\", \"tags\": [], \"article\": [{\"start\": 0, \"text\": \"The author says the level was touched in 55.2% of sessions.\"}], \"screen_data\": [], \"card\": {\"profile\": \"analysis\", \"domain\": \"market testing\", \"claim\": \"Level touched in 55.2% of sessions\", \"author_conclusion\": \"Small edge\", \"reported\": [\"Level touched in 55.2% of sessions @3\"], \"method_stated\": [], \"not_stated\": [], \"caution\": [], \"agent_notes\": []}}"
+}

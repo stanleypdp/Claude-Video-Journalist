@@ -1,0 +1,82 @@
+[
+  {
+    "query": "my agent has ~/research/OUTPUT/reels with INDEX.md and cards/, which of these claims can we actually test?",
+    "should_trigger": true
+  },
+  {
+    "query": "use the cards from the reels folder: build me a test plan for the card about the signal edge, only use what's in the card",
+    "should_trigger": true
+  },
+  {
+    "query": "check the 54.2% in card sample-55de012bbcb5 against the transcript, where did the author say it?",
+    "should_trigger": true
+  },
+  {
+    "query": "I finished backtesting the claim from card xyz and it held up. update the card and the index",
+    "should_trigger": true
+  },
+  {
+    "query": "read INDEX.md in OUTPUT/clips and tell me which theses are about pricing",
+    "should_trigger": true
+  },
+  {
+    "query": "what does 'not_stated' mean on these cards and what do I do with it?",
+    "should_trigger": true
+  },
+  {
+    "query": "these reel notes say the creator found a 30% saving. is that established? how should I cite it in my report?",
+    "should_trigger": true
+  },
+  {
+    "query": "compare the claims in cards a and b from the videos folder - do they contradict each other?",
+    "should_trigger": true
+  },
+  {
+    "query": "one card shows number_check conflict(OCR:55.2). what should I do before using the number?",
+    "should_trigger": true
+  },
+  {
+    "query": "mark the claim from that reel as rejected, our test showed no effect, and add the notes",
+    "should_trigger": true
+  },
+  {
+    "query": "turn this YouTube link into notes for my agent: https://youtube.com/watch?v=abc",
+    "should_trigger": false
+  },
+  {
+    "query": "summarize this reel transcript for me in two sentences",
+    "should_trigger": false
+  },
+  {
+    "query": "write a test plan for migrating our database to postgres 16",
+    "should_trigger": false
+  },
+  {
+    "query": "build me a dashboard of my sales numbers from this csv",
+    "should_trigger": false
+  },
+  {
+    "query": "what is the best way to structure a research notes folder for a team?",
+    "should_trigger": false
+  },
+  {
+    "query": "run the video-read pipeline on ~/clips/week-3",
+    "should_trigger": false
+  },
+  {
+    "query": "explain how faster-whisper works",
+    "should_trigger": false
+  },
+  {
+    "query": "fact-check this tweet claiming that coffee cures anxiety",
+    "should_trigger": false
+  },
+  {
+    "query": "create YAML front matter for my blog posts",
+    "should_trigger": false
+  },
+  {
+    "query": "review my pull request for the cards/ module bug",
+    "should_trigger": false
+  }
+]

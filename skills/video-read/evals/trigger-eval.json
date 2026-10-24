@@ -1,0 +1,82 @@
+[
+  {
+    "query": "ok so a friend sent me a reel about some indicator and I want my agent to know what it claims, can you pull the knowledge out of it? file is ~/Downloads/indicator-reel.mp4",
+    "should_trigger": true
+  },
+  {
+    "query": "here's a TikTok link https://vm.tiktok.com/ZMabc123/ - extract what they actually claim and the numbers they show, with timestamps",
+    "should_trigger": true
+  },
+  {
+    "query": "I have 40 shorts in ~/clips/ai-tools. make notes from them that my agent can load and check later, one file per video",
+    "should_trigger": true
+  },
+  {
+    "query": "what does this YouTube short claim vs what it shows on screen? I want to know if the numbers on the slides match what the guy says. https://youtube.com/shorts/abc123XYZ",
+    "should_trigger": true
+  },
+  {
+    "query": "turn this Loom walkthrough into step-by-step knowledge my Claude agent can follow (https://www.loom.com/share/0123456789abcdef)",
+    "should_trigger": true
+  },
+  {
+    "query": "read these reels for me and give me an index of the claims, I'll test the ones that look interesting",
+    "should_trigger": true
+  },
+  {
+    "query": "can you check how much the video-read run on my folder would cost before running it? ~/clips/week-3",
+    "should_trigger": true
+  },
+  {
+    "query": "rebuild the cards in OUTPUT/week-3 from cache, I updated the validator",
+    "should_trigger": true
+  },
+  {
+    "query": "transcribe interview.mp4 with timestamps, I don't need anything else",
+    "should_trigger": false
+  },
+  {
+    "query": "add english subtitles to my reel and burn them into the video, 1080x1920",
+    "should_trigger": false
+  },
+  {
+    "query": "summarize this youtube video for me in 3 bullets: https://youtube.com/watch?v=abc123",
+    "should_trigger": false
+  },
+  {
+    "query": "analyze the visual style of this reel - cuts per second, color palette, typography - so I can copy the look",
+    "should_trigger": false
+  },
+  {
+    "query": "cut the silences out of lecture.mp4 and export a shorter version",
+    "should_trigger": false
+  },
+  {
+    "query": "write a script for a 30 second TikTok about my coffee brand",
+    "should_trigger": false
+  },
+  {
+    "query": "here's a PDF of a research paper, extract the key claims and numbers into a table",
+    "should_trigger": false
+  },
+  {
+    "query": "my agent has an OUTPUT folder of cards already; which of these claims should we test first?",
+    "should_trigger": false
+  },
+  {
+    "query": "download this instagram reel to my desktop as an mp4, nothing else",
+    "should_trigger": false
+  },
+  {
+    "query": "OCR the screenshots in ~/Pictures/screens and give me the text",
+    "should_trigger": false
+  },
+  {
+    "query": "translate the spanish video transcript I pasted below into english",
+    "should_trigger": false
+  },
+  {
+    "query": "generate a thumbnail for my youtube video about index funds",
+    "should_trigger": false
+  }
+]

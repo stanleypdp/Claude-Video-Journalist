@@ -1,0 +1,6 @@
+schema_version: "1.1"
+name: rejects-uncovered-number
+expected_outcome: |
+  The coverage check is run on OUTPUT/clip and fails. The report names +4.4 (the card's `reported` section) as a number that appears in neither the transcript nor the OCR, says 55.2 is covered, and leaves every file unchanged.
+context:
+  scaffold_script: place-files.sh

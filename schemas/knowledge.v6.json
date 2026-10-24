@@ -1,0 +1,278 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": 6
+    },
+    "role": {
+      "const": "knowledge"
+    },
+    "title": {
+      "type": "string",
+      "description": "In the language of the transcript; never translated."
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "article": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "start",
+          "text"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "screen_data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp_s": {
+            "type": "number",
+            "minimum": 0
+          },
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "confidence": {
+            "enum": [
+              "exact",
+              "approximate"
+            ]
+          }
+        },
+        "required": [
+          "timestamp_s",
+          "label",
+          "value",
+          "confidence"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "card": {
+      "type": "object",
+      "properties": {
+        "profile": {
+          "enum": [
+            "analysis",
+            "howto",
+            "opinion",
+            "news_promo"
+          ]
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain in the language of the transcript."
+        },
+        "claim": {
+          "type": "string"
+        },
+        "author_conclusion": {
+          "type": "string"
+        },
+        "goal": {
+          "type": "string"
+        },
+        "reported": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "method_stated": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "not_stated": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "caution": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agent_notes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "tools_named": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "claims": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "evidence_given": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "number_check": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "what_is_promised": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "local_rejections": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "derived": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "formula": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "value",
+              "formula"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": [
+        "profile",
+        "domain",
+        "caution"
+      ],
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "analysis"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "claim",
+              "author_conclusion",
+              "reported",
+              "method_stated",
+              "not_stated",
+              "agent_notes"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "howto"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "goal",
+              "steps",
+              "tools_named",
+              "not_stated"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "opinion"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "claims",
+              "evidence_given",
+              "not_stated"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "profile": {
+                "const": "news_promo"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "claim",
+              "what_is_promised",
+              "evidence_given",
+              "not_stated"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "required": [
+    "schema_version",
+    "role",
+    "title",
+    "tags",
+    "article",
+    "screen_data",
+    "card"
+  ],
+  "additionalProperties": false
+}

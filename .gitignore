@@ -1,0 +1,27 @@
+/data/
+/OUTPUT/
+*.mp4
+*.mov
+*.m4v
+*.webm
+*.mkv
+*.wav
+*.part
+.env
+.env.*
+!.env.example
+cookies.txt
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+*.egg-info/
+*.skill
+*-workspace/
+# whisper / ASR model files
+*.bin
+*.onnx
+*.safetensors
+models--*/
