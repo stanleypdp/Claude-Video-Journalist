@@ -6,7 +6,7 @@ Give it a video file, a folder or a URL. You get an index, one claim card per vi
 
 Runs on your machine. ffmpeg, Whisper and OCR do the boring part; **one Claude CLI call per new video** writes the card. No server, no API key in the repo, no uploading videos anywhere.
 
-Polish readers: [README.pl.md](README.pl.md). Last updated: 2026-10-24. Version 0.1.1.
+Polish readers: [README.pl.md](README.pl.md). Last updated: 2026-10-24. Version 0.1.0.
 
 ---
 
@@ -54,7 +54,7 @@ A complete example, made from the invented 48-second sample in this repo, is in 
 ## Install and run
 
 ```bash
-git clone <repository-url> Claude-Video-Journalist && cd Claude-Video-Journalist
+git clone https://github.com/stanleypdp/Claude-Video-Journalist.git && cd Claude-Video-Journalist
 ./install.sh                                   # uv, ffmpeg, yt-dlp, Python packages (details: install.md)
 uv run python -m vjournalist preflight         # checks ffmpeg, whisper, claude, yt-dlp
 uv run python -m vjournalist read https://example.com/some-video   # or a file, or a folder
@@ -107,6 +107,12 @@ No. This tool records content. Style analysis is a separate project.
 ## Known limits
 
 False rejections of correct table labels; the Whisper `small` model on noisy audio; the internal ids of the gap checks are Polish and mapped to English labels; chapter validation for videos over about 5 minutes is not calibrated; developed and used on macOS, while CI runs only the unit tests on Linux. Planned work: [ROADMAP.md](ROADMAP.md). History: [CHANGELOG.md](CHANGELOG.md).
+
+## Did it work for you?
+
+If it saved you an hour, a star helps others find it. If it did not work, open an issue with the command you ran and the last 20 lines of output. If you used it for something unexpected, tell me in [Discussions](https://github.com/stanleypdp/Claude-Video-Journalist/discussions); I collect those.
+
+Installing with Homebrew asks for confirmation once; answer `y`.
 
 ## License
 
