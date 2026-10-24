@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 - 2026-10-24
+
+- Last-frame extraction no longer depends on the ffmpeg build: some builds (Ubuntu CI) exit 0 and write no file when the seek lands past the last video frame, which skipped the step-back retry. A missing or empty file now counts as a miss and the scan steps back in 0.04 s increments for up to about 0.5 s. Regression test added.
+- All error and log messages are in English (`Brak klatki...` was the last Polish one). Polish stays only in the language lexicon and in test fixtures. `scripts/prepush_scan.sh` has a new category, "Polish in error / log messages", that also covers files marked as Polish.
+- `install.sh`: exit code 0 after a successful Homebrew install even when `brew` itself returns non-zero (judged by the tool being on PATH); exit code 1 only if a tool is still missing after `brew install`. Prints a note at the start that Homebrew may ask for confirmation.
+
 ## 0.1.0 - 2026-10-24
 
 First public version.

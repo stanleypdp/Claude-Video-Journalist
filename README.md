@@ -6,7 +6,7 @@ Give it a video file, a folder or a URL. You get an index, one claim card per vi
 
 Runs on your machine. ffmpeg, Whisper and OCR do the boring part; **one Claude CLI call per new video** writes the card. No server, no API key in the repo, no uploading videos anywhere.
 
-Polish readers: [README.pl.md](README.pl.md). Last updated: 2026-10-24. Version 0.1.0.
+Polish readers: [README.pl.md](README.pl.md). Last updated: 2026-10-24. Version 0.1.1.
 
 ---
 

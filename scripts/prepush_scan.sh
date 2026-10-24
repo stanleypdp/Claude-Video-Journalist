@@ -6,6 +6,8 @@
 # Polish is a supported source language, so files that carry the marker "polish-lexicon" or "polish-fixtures"
 # (language patterns and Polish test sentences), README.pl.md and prompts/knowledge.txt (it names the Polish step
 # labels the model must use for Polish sources) are not scanned for Polish; they are listed.
+# Exception, log and CLI messages (raise, print, logging, warnings, echo, exit) must be English everywhere,
+# including in those marked files: Polish stays only in the language lexicon and in test fixtures.
 set -u
 cd "$(dirname "$0")/.."
 
@@ -55,6 +57,18 @@ PL_RE='[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|\b(jest|oraz|się|który|która|kt
 for f in "${PL_FILES[@]}"; do PL_OUT+="$(grep -nIE -- "$PL_RE" "$f" 2>/dev/null | sed "s|^|$f:|")"$'\n'; done
 report "Polish text in code / EN docs" "$(printf '%s' "$PL_OUT" | grep . || true)"
 echo "    (skipped on purpose, Polish is a supported source language: ${PL_SKIPPED[*]:-none})"
+
+# Messages are checked in every .py/.sh file (marked ones too). Polish words without diacritics count, so
+# "Brak klatki ..." is caught. Lexicon dictionaries and test sentences are not on raise/print/log lines.
+MSG_LINE='(raise |Error\(|Exception\(|print\(|logger?\.|logging\.|warnings\.warn|warn\(|echo |sys\.exit|SystemExit|typer\.|click\.)'
+MSG_PL='[ąćęłńóśźżĄĆĘŁŃÓŚŹŻ]|\b(brak|nie|nieznany|nieprawidłowy|błąd|plik|pliku|klatki|klatka|podczas|lokalnego|skanowania|zbyt|wymaga|uruchom|spróbuj|sprobuj|podaj|użyj|uzyj|lub|dla|tylko|musi|należy|nalezy|katalog|wideo|film|zapis|odczyt|przetwarzani[ea]|zakończono|zakonczono|wynik|jest|oraz|się|który)\b'
+MSG_OUT=""
+for f in "${FILES[@]}"; do
+  [ "$f" = "$SELF" ] && continue
+  case "$f" in *.py|*.sh) ;; *) continue ;; esac
+  MSG_OUT+="$(grep -nIE -- "$MSG_LINE" "$f" 2>/dev/null | grep -iE -- "$MSG_PL" | sed "s|^|$f:|")"$'\n'
+done
+report "Polish in error / log messages" "$(printf '%s' "$MSG_OUT" | grep . || true)"
 
 report "own folders, names, projects" "$(scan '(IQ Mind Reader|Reel-?Lab|Claude-Detector|~/Desktop|/Desktop/|_ARCHIWUM|Piotr|Dominik|iCloud|Hetzner|\.ssh|Superbet|Sport Betting|Stock Betz|tiktok\.com/@|instagram\.com/[A-Za-z0-9_.]+/?$)')"
 

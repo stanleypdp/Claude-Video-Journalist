@@ -4,7 +4,8 @@
 #   ./install.sh --skills        also link the two skills into ~/.claude/skills
 #   ./install.sh --dry-run       print what would be done
 # Nothing here uses sudo. Missing system tools are installed with Homebrew when it is present, otherwise
-# the script prints the command to run yourself.
+# the script prints the command to run yourself. Exit code 0 means every tool it tried to install is now on PATH,
+# even when brew itself reported a warning (for example a failed post-install step).
 set -eu
 
 DRY=0; SKILLS=0
@@ -21,14 +22,22 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 run() { echo "+ $*"; if [ "$DRY" -eq 0 ]; then "$@"; fi; }
 have() { command -v "$1" >/dev/null 2>&1; }
 
-need_brew() { # tool, brew formula
+FAILED=0
+need_brew() { # tool, brew formula, hint shown when brew is absent
   if have "$1"; then echo "ok: $1"; return; fi
-  if have brew; then run brew install "$2"; else echo "missing: $1 (install it, e.g. your package manager's '$2')"; fi
+  if have brew; then
+    # brew can exit non-zero although the tool was installed; judge by the tool being on PATH, not by brew's code
+    run brew install "$2" || echo "warning: brew install $2 exited with a non-zero code" >&2
+    if [ "$DRY" -eq 0 ] && ! have "$1"; then echo "failed: $1 is still missing after brew install $2" >&2; FAILED=1; fi
+  else
+    hint="${3:-}"; [ -n "$hint" ] || hint="install it, e.g. your package manager's '$2'"
+    echo "missing: $1 ($hint)"
+  fi
 }
 
-if ! have uv; then
-  if have brew; then run brew install uv; else echo "missing: uv (https://docs.astral.sh/uv/)"; fi
-else echo "ok: uv"; fi
+have brew && echo "Note: Homebrew may ask for confirmation (or your password) while installing missing tools."
+
+need_brew uv uv "https://docs.astral.sh/uv/"
 need_brew ffmpeg ffmpeg
 need_brew yt-dlp yt-dlp   # only used for URL input
 have claude && echo "ok: claude CLI" || echo "missing: Claude Code CLI (https://claude.com/claude-code), log in with: claude auth login"
@@ -47,3 +56,4 @@ fi
 echo
 echo "Next: uv run python -m vjournalist preflight"
 echo "The first read downloads the Whisper 'small' model (about 460 MB) into data/models."
+exit "$FAILED"

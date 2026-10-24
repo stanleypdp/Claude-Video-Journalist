@@ -8,7 +8,8 @@ from PIL import Image, ImageChops, ImageStat
 
 from vjournalist.storage import run
 
-FRAME_RETRIES = 12
+FRAME_RETRIES = 12  # 12 steps of FRAME_STEP_S: look back at most ~0.5 s from the requested time
+FRAME_STEP_S = 0.04
 
 
 def extract_frame(video, work, time_s, metadata, width=720):
@@ -18,9 +19,10 @@ def extract_frame(video, work, time_s, metadata, width=720):
     if not path.exists():
         path.parent.mkdir(parents=True, exist_ok=True)
         # The container can outlast the video stream (longer audio track): a seek past the last frame
-        # yields no frame and ffmpeg exits with 234. Step back frame by frame until one is decoded.
+        # yields no frame. Depending on the ffmpeg build it exits with 234 or exits 0 and writes nothing.
+        # Step back until a frame is decoded, for at most FRAME_RETRIES * FRAME_STEP_S seconds.
         for back in range(FRAME_RETRIES + 1):
-            at = max(0, time_s - back / fps)
+            at = max(0, time_s - back * FRAME_STEP_S)
             try:
                 run(
                     [
@@ -44,13 +46,15 @@ def extract_frame(video, work, time_s, metadata, width=720):
                         path,
                     ]
                 )
-                break
+                if path.exists() and path.stat().st_size > 0:
+                    break
+                path.unlink(missing_ok=True)
             except RuntimeError:
                 path.unlink(missing_ok=True)
-                if back == FRAME_RETRIES or at == 0:
-                    raise
+            if back == FRAME_RETRIES or at == 0:
+                break
     if not path.exists():
-        raise RuntimeError("Brak klatki podczas lokalnego skanowania.")
+        raise RuntimeError("No frame could be extracted during the local scan.")
     return path
 
 

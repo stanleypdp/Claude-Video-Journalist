@@ -32,6 +32,22 @@ def test_last_frame_when_audio_outlasts_video(audio_outlasts_video, tmp_path, mo
         content_scan.extract_frame(str(audio_outlasts_video), tmp_path / "work2", 1.46, metadata)
 
 
+def test_last_frame_when_ffmpeg_exits_zero_without_output(audio_outlasts_video, tmp_path, monkeypatch):
+    """Older ffmpeg builds (Linux CI) exit 0 and write nothing when the seek is past the last video frame."""
+    real_run = content_scan.run
+
+    def lenient_run(args, *a, **kw):
+        if float(args[args.index("-ss") + 1]) > 1.2:
+            return ""
+        return real_run(args, *a, **kw)
+
+    monkeypatch.setattr(content_scan, "run", lenient_run)
+    frame = content_scan.extract_frame(
+        str(audio_outlasts_video), tmp_path / "work", 1.46, {"duration_s": 1.5, "fps": 25}
+    )
+    assert frame.exists() and frame.stat().st_size > 0
+
+
 # --- source language ----------------------------------------------------------------------
 
 from copy import deepcopy  # noqa: E402
