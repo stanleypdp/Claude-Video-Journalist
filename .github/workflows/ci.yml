@@ -16,7 +16,7 @@ jobs:
         run: uv sync --locked
       - name: Lint
         run: uv run ruff check .
-      - name: Tests (no Whisper, no network, no Claude login: ASR/OCR are mocked)
+      - name: "Tests (no Whisper, no network, no Claude login; ASR/OCR are mocked)"
         run: uv run pytest -q
       - name: Pre-push scan
         run: ./scripts/prepush_scan.sh
