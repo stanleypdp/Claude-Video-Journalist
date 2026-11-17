@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.1.2 - 2026-11-17
+
+- Installable as a Claude Code plugin: `.claude-plugin/plugin.json` and `marketplace.json`. One line in Claude Code installs both skills.
+- An installed copy (no `.git` next to the package) keeps its cache, work files and Whisper model in `~/.vjournalist/data`, because the plugin folder is replaced on every update and the cache holds paid results. A clone still uses its own `data/`; `DATA_DIR` overrides both. Tests added.
+- The launcher says so when `uv` is missing.
+- README: plugin install first, part of the sample card shown near the top, version line corrected (it still said 0.1.0).
+
 ## 0.1.1 - 2026-10-24
 
 - Last-frame extraction no longer depends on the ffmpeg build: some builds (Ubuntu CI) exit 0 and write no file when the seek lands past the last video frame, which skipped the step-back retry. A missing or empty file now counts as a miss and the scan steps back in 0.04 s increments for up to about 0.5 s. Regression test added.

@@ -23,8 +23,18 @@ Działa na Twoim komputerze: ffmpeg, faster-whisper i OCR robią część mechan
 
 ## Instalacja i użycie
 
+**Jako plugin Claude Code** (Claude Code 2.1.275 lub nowszy). Wpisz w Claude Code:
+
+```
+/plugin install video-journalist --marketplace stanleypdp/Claude-Video-Journalist
+```
+
+Potem napisz: *przeczytaj tę rolkę: https://example.com/jakis-film*. Plugin potrzebuje [uv](https://docs.astral.sh/uv/) i ffmpeg w PATH (`brew install uv ffmpeg`; do adresów URL także `yt-dlp`). Pakiety Pythona uv instaluje przy pierwszym uruchomieniu. Cache i model Whisper trafiają do `~/.vjournalist/data`, więc aktualizacja pluginu nie każe płacić drugi raz za ten sam film.
+
+**Z klona** (wiersz poleceń albo praca nad kodem):
+
 ```bash
-git clone <adres-repozytorium> Claude-Video-Journalist && cd Claude-Video-Journalist
+git clone https://github.com/stanleypdp/Claude-Video-Journalist.git && cd Claude-Video-Journalist
 ./install.sh                                     # uv, ffmpeg, yt-dlp, pakiety Pythona (szczegóły: install.md)
 uv run python -m vjournalist preflight
 uv run python -m vjournalist read <plik | folder | URL>
@@ -37,7 +47,7 @@ Potrzebne zalogowane Claude Code CLI (`claude auth login`). Pierwszy przebieg po
 - [`video-read`](skills/video-read/SKILL.md): produkuje pliki z pliku, folderu lub URL (potrzebuje pakietu Pythona z tego repozytorium).
 - [`claim-cards`](skills/claim-cards/SKILL.md): instrukcja dla agenta-konsumenta (indeks najpierw, plan testu z karty, weryfikacja liczby przez `tx`, zapis wyników). Czysty tekst, bez zależności.
 
-Wgranie: `./install.sh --skills` linkuje je do `~/.claude/skills/`, albo skopiuj foldery, albo zbuduj paczkę `.skill`. Paczka `.skill` zawiera same instrukcje i cienkie skrypty, więc ustaw `VJOURNALIST_HOME` na sklonowane repozytorium.
+Plugin instaluje oba. Z klona: `./install.sh --skills` linkuje je do `~/.claude/skills/`, albo skopiuj foldery, albo zbuduj paczkę `.skill`. Paczka `.skill` zawiera same instrukcje i cienkie skrypty, więc ustaw `VJOURNALIST_HOME` na sklonowane repozytorium.
 
 ## Testy i znane ograniczenia
 

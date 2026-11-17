@@ -1,12 +1,12 @@
 # Claude-Video-Journalist
 
-**A Claude Code skill that turns TikToks, Reels, Shorts and other short videos into evidence-backed Markdown your AI agents can actually use.**
+**Let Claude watch short videos for you. A Claude Code skill that turns TikToks, Reels, Shorts and YouTube clips into evidence-backed Markdown your AI agents can actually use.**
 
 Give it a video file, a folder or a URL. You get an index, one claim card per video, a faithful article, and the transcript plus on-screen text as evidence. Every number in a card points to the second it appears in the video and is checked against both what was said and what was shown. Your agent reads the card, not the whole film.
 
 Runs on your machine. ffmpeg, Whisper and OCR do the boring part; **one Claude CLI call per new video** writes the card. No server, no API key in the repo, no uploading videos anywhere.
 
-Polish readers: [README.pl.md](README.pl.md). Last updated: 2026-10-24. Version 0.1.0.
+Polish readers: [README.pl.md](README.pl.md). Last updated: 2026-11-17. Version 0.1.2.
 
 ---
 
@@ -23,7 +23,28 @@ OUTPUT/clips/
   archive/<id>.screen.md    de-duplicated on-screen text with first/last time seen
 ```
 
-A complete example, made from the invented 48-second sample in this repo, is in [`examples/sample/OUTPUT`](examples/sample/OUTPUT). Yes, the trading strategy in it is fictional. So is the index it trades. We checked.
+Part of the card for the invented 48-second sample in this repo. `@15` means second 15 of the video:
+
+```markdown
+status: untested
+number_check:
+  '0.04': screen_only
+  '3.8': speech_only
+  '54.2': ok
+
+## reported
+- Beacon right in 54.2% of sessions @15
+- Coin flip right in 50.4%, edge of 3.8 points @18
+- 812 trades over 5 years, +7.4R before costs @33
+- Cost per trade: 0.04R (on-screen "Cost per trade: 0.04R") @33
+
+## not_stated
+- Result after costs as a number
+- How the beacon signal is defined or calculated
+- Statistical significance or confidence of the 3.8-point edge
+```
+
+The whole output is in [`examples/sample/OUTPUT`](examples/sample/OUTPUT). Yes, the trading strategy in it is fictional. So is the index it trades. We checked.
 
 ## Who this is for
 
@@ -53,6 +74,16 @@ A complete example, made from the invented 48-second sample in this repo, is in 
 
 ## Install and run
 
+**As a Claude Code plugin** (Claude Code 2.1.275 or later). Type this in Claude Code:
+
+```
+/plugin install video-journalist --marketplace stanleypdp/Claude-Video-Journalist
+```
+
+Then ask: *read this reel: https://example.com/some-video*. The plugin needs [uv](https://docs.astral.sh/uv/) and ffmpeg on your PATH (`brew install uv ffmpeg`; add `yt-dlp` for URLs). uv installs the Python packages on the first run. The cache and the Whisper model go to `~/.vjournalist/data`, so a plugin update does not make you pay for the same video twice.
+
+**From a clone** (command line, or to change the code):
+
 ```bash
 git clone https://github.com/stanleypdp/Claude-Video-Journalist.git && cd Claude-Video-Journalist
 ./install.sh                                   # uv, ffmpeg, yt-dlp, Python packages (details: install.md)
@@ -60,7 +91,7 @@ uv run python -m vjournalist preflight         # checks ffmpeg, whisper, claude,
 uv run python -m vjournalist read https://example.com/some-video   # or a file, or a folder
 ```
 
-Needs the Claude Code CLI logged in (`claude auth login`). First run downloads the Whisper `small` model (about 460 MB). Commands: `read`, `rebuild`, `index`, `check`, `tx`, `preflight`. `read --dry-run` lists what would be analysed before anything is spent.
+Both ways need the Claude Code CLI logged in (`claude auth login`). First run downloads the Whisper `small` model (about 460 MB). Commands: `read`, `rebuild`, `index`, `check`, `tx`, `preflight`. `read --dry-run` lists what would be analysed before anything is spent.
 
 URLs go through yt-dlp. If the uploader supplied captions in the video's own language, they replace Whisper (`asr: platform_captions` in the archive header). Automatic captions are not used.
 
@@ -71,7 +102,7 @@ URLs go through yt-dlp. If the uploader supplied captions in the video's own lan
 | [`video-read`](skills/video-read/SKILL.md) | producing the files above from a file, folder or URL | this repository's Python package |
 | [`claim-cards`](skills/claim-cards/SKILL.md) | an agent that consumes the files: index first, plan a test from a card, verify a number with `tx`, record results | nothing, plain text |
 
-Install into Claude Code with `./install.sh --skills` (links both into `~/.claude/skills/`), copy the two folders yourself, or build a `.skill` package with the skill-creator tooling. A `.skill` file holds only instructions and thin scripts, so set `VJOURNALIST_HOME` to your clone. Details in [install.md](install.md).
+The plugin installs both. From a clone, `./install.sh --skills` links both into `~/.claude/skills/`; you can also copy the two folders yourself, or build a `.skill` package with the skill-creator tooling. A `.skill` file holds only instructions and thin scripts, so set `VJOURNALIST_HOME` to your clone. Details in [install.md](install.md).
 
 ## How to use the output in a Claude Project
 

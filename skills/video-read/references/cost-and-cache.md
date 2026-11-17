@@ -8,7 +8,7 @@ A validation failure normally triggers one repair call (`LLM_ATTEMPTS=2`, defaul
 
 ## Cache
 
-Key: `data/cache/<sha256>/roles/knowledge/v6/`. The same file (any name, any folder) is never analysed twice. `read` prints cache hits with their historical cost and charges 0 for them.
+Key: `data/cache/<sha256>/roles/knowledge/v6/`. `data/` is the clone's own folder, or `~/.vjournalist/data` when the skill runs from an installed plugin (`DATA_DIR` overrides both). The same file (any name, any folder) is never analysed twice. `read` prints cache hits with their historical cost and charges 0 for them.
 
 - `rebuild <OUTPUT/X>` regenerates cards, articles and archives from the stored raw answers with the current validator. Zero calls. Use it after upgrading the code.
 - Mechanics (ASR, OCR, scene scan) are stored per SHA-256 under `data/work/<sha256>/` and reused.

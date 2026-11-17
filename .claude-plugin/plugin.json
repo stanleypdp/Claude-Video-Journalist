@@ -1,0 +1,25 @@
+{
+  "name": "video-journalist",
+  "description": "Let Claude read short videos (TikTok, Reels, Shorts, YouTube, local files): local Whisper + OCR turn each one into a claim card, an article and a timestamped transcript, and code rejects any number that is not in the source. One Claude call per new video.",
+  "version": "0.1.2",
+  "author": {
+    "name": "stanleypdp",
+    "url": "https://github.com/stanleypdp"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/stanleypdp/Claude-Video-Journalist",
+  "repository": "https://github.com/stanleypdp/Claude-Video-Journalist",
+  "keywords": [
+    "video",
+    "video-to-markdown",
+    "transcript",
+    "whisper",
+    "ocr",
+    "tiktok",
+    "reels",
+    "youtube",
+    "knowledge-base",
+    "claude-skills",
+    "ai-agents"
+  ]
+}

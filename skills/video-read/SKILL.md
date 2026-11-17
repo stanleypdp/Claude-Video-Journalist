@@ -31,7 +31,7 @@ python scripts/pipeline.py <file|folder|URL>      # preflight -> dry run -> read
 
 The same steps individually: `read.py <file|folder|URL> [--dry-run] [--recursive] [--output DIR] [--captions FILE] [--no-wait]`, `check.py <OUTPUT/X>`, `rebuild.py <OUTPUT/X>`, `python -m vjournalist index <OUTPUT/X>`, `tx.py <id> --at 53 --window 20`. Equivalent: `python -m vjournalist <command>` inside the repo.
 
-If `preflight` reports MISS, read `install.md` in the repository (it lists the one-line installs) instead of guessing. If the scripts say `vjournalist is not installed`, set `VJOURNALIST_HOME` to the clone.
+If `preflight` reports MISS, read `install.md` in the repository (it lists the one-line installs) instead of guessing. If the scripts say `vjournalist is not installed`, set `VJOURNALIST_HOME` to the clone. If they say `uv is not on PATH`, the user has to install uv first. Installed as a plugin, the skill keeps its cache and the Whisper model in `~/.vjournalist/data` (a clone keeps them in its own `data/`).
 
 Before a run on a folder, do the dry run and tell the user how many videos are new: each is one paid call (about 0.05-0.15 USD-equivalent on the user's subscription limits for a short clip; see `references/cost-and-cache.md`). Do not start a large batch the user did not ask for.
 
